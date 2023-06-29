@@ -1,0 +1,4 @@
+hostroot;,admin,
+m1;,admin,u1,u2,
+m2;,admin,u2,u3,
+m3;,admin,u3,u2,u1,
