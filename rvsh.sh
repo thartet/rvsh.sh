@@ -290,6 +290,8 @@ function commandCall {
 		echo ""
 	else
 		case $command in
+            who)
+                commandWho "$@";;
 			*)
 				unkownCommand "$@";;
 		esac
