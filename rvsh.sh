@@ -27,13 +27,7 @@ function error {
 		5) 
 			echo "[-] Error : You do not have access to the requested machine or it doesn't exist." 
                 ;;
-		6) 
-			echo "Erreur 6: Le mot de passe administrateur n'est pas correct" > $(tty);;
-		7)
-			echo "Erreur 7: L'option entrée n'existe pas" > $(tty);;
-		8)
-			echo "Erreur 8: La command entrée n'existe pas" > $(tty);;
-		9)
+		6)
             echo "[-] Error : The user or the machine that you selected to send your message do not exist." 
                 ;;
 	esac
@@ -81,7 +75,7 @@ function userCheck {
 
 # Function to verify if the machine exists
 function machineCheck { 
-    echo "[+] Verifying if the machine exists..."
+    printf "\n[+] Verifying if the machine exists..."
 	argCheck $# 1
 	if [ $? -eq 0 ]; then
 		machine=$1
@@ -89,7 +83,7 @@ function machineCheck {
 			do
 				machine_name=$(echo $line | sed 's/^\(.*\);.*$/\1/g');
 				if [ $machine == $machine_name ]; then 
-					echo "[+] The machine $machine exists."
+					printf "\n[+] The machine $machine exists."
 					return 0
 				fi
 			done < $file_machine
@@ -111,7 +105,7 @@ function passwordCheck {
 				if [ $user == $user_name ] ; then # On trouve le user dans le fichier 
 					correct_password=$(echo $line | sed 's/^.*;\(.*\);.*;.*;.*$/\1/g') ; # On récupère le mot de passe correct
 					if [ $password == $correct_password ] ; then 
-						echo "[+] Password correct"
+						printf "\n[+] Password correct"
 						return 0
 					fi
 				fi
@@ -123,7 +117,7 @@ function passwordCheck {
 
 # Function to verify if the user has access to the machine
 function accessCheck {
-	echo "[+] Verifying if the user has access to the machine..."
+	printf "\n[+] Verifying if the user has access to the machine..."
 	argCheck $# 2
 	if [ $? -eq 0 ]; then
 		user=$1
@@ -133,7 +127,7 @@ function accessCheck {
 				if [ $machine == $(echo $line | sed 's/^\(.*\);.*$/\1/g') ]; then 
 					access=$(echo $line | sed 's/^.*;\(.*\)$/\1/g' | sed "s/^.*,$user,.*$/,$user,/g") 
 					if [ ",$user," == $access ]; then 
-						echo "[+] Access granted"
+						printf "\n[+] Access granted\n"
 						return 0
 					fi
 				fi
@@ -150,7 +144,7 @@ function connectedCheck {
 	machine=$2
 
 	if [[ $(grep "$user;$machine" $file_connexion) == "" ]] ; then
-		error 9
+		error 6
 		return 1
 	else
 		return 0
@@ -314,7 +308,7 @@ function logout {
 	user=$2
 	machine=$3
 
-	echo "Deconnecting from $user@$machine" 
+	printf "Deconnecting from $user@$machine\n\n" 
 
 	if [[ $option -eq 1 ]] ; then
 		removeConnexion $user $machine
