@@ -39,6 +39,9 @@ function help {
     echo "-connect [USER] [MACHINE] [COMMAND] [ARGUMENTS]... : Connect to a machine"
     echo "-admin [COMMAND] [ARGUMENTS]... : Execute an admin command"
     echo "-help : Display this help"
+	echo "Commands available in connect mode :"
+	echo "who : Display the list of users connected to a specific machine"
+	echo "rusers : Display the list of users connected on the network"
 }
 
 
@@ -292,6 +295,8 @@ function commandCall {
 		case $command in
             who)
                 commandWho "$@";;
+			rusers)
+				commandRusers "$@";;
 			*)
 				unkownCommand "$@";;
 		esac
