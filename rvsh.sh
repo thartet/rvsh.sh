@@ -13,22 +13,22 @@ source $path/command_connect.sh
 function error {
 	case $1 in
 		1) 
-			echo "[-] Error : The number of parameters provided is not correct." 
+			printf "\n[-] Error : The number of parameters provided is not correct." 
                 ;;
 		2)
-			echo "[-] Error : The user provided does not exist." 
+			printf "\n[-] Error : The user provided does not exist." 
                 ;;
 		3)
-			echo "[-] Error : The machine provided does not exist." 
+			printf "\n[-] Error : The machine provided does not exist." 
                 ;;
 		4)	
-			echo "[-] Error : Wrong password." 
+			printf "\n[-] Error : Wrong password." 
                 ;;
 		5) 
-			echo "[-] Error : You do not have access to the requested machine or it doesn't exist." 
+			printf "\n[-] Error : You do not have access to the requested machine or it doesn't exist." 
                 ;;
 		6)
-            echo "[-] Error : The user or the machine that you selected to send your message do not exist." 
+            printf "\n[-] Error : The user or the machine that you selected to send your message do not exist." 
                 ;;
 	esac
 }

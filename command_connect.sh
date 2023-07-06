@@ -20,8 +20,9 @@ function commandWho {
         return 1
     fi
 
-    while IFS=';' read -r terminal user machine date; do
-        printf "\nUser $user connected on $machine at the date $date"
+    while IFS=';' read -r terminal userLine machineLine date; do
+        printf "\nUser $userLine connected on $machineLine at the date $date"
     done < $file_connexion
+    printf "\n"
 }
 
