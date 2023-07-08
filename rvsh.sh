@@ -297,6 +297,8 @@ function commandCall {
                 commandWho "$@";;
 			rusers)
 				commandRusers "$@";;
+			rhost)
+				commandRhost "$@";;
 			*)
 				unkownCommand "$@";;
 		esac
@@ -315,7 +317,8 @@ function logout {
 	user=$2
 	machine=$3
 
-	printf "Deconnecting from $user@$machine\n\n" 
+	printf "Deconnecting from $user@$machine" 
+	printf "\n"
 
 	if [[ $option -eq 1 ]] ; then
 		removeConnexion $user $machine

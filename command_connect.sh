@@ -41,3 +41,15 @@ function commandRusers {
     printf "\n"
 }
 
+#Function to access to the list of machines connected to the network
+function commandRhost {
+    argCheck $# 0
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
+    while IFS=';' read -r machineName userList; do
+        printf "\nMachine $machineName"
+    done < $file_machine
+    printf "\n"
+}
